@@ -3,6 +3,7 @@ function validate() {
 
 
     if (valid) { // Show success in div#result
+
     } else { // Show error message in div#result
     }
 }
@@ -17,56 +18,48 @@ function isValid(creditCardNumber) { // is creditCardNumber valid?
 
     let sumaTotal = 0 //variable
 
-    for (let index = 0; index < invertirArray.length; index++) { //4137894711755904
+    for (let index = 0; index < Number(invertirArray.length); index++) { //4137894711755904
 
         const element = parseInt(invertirArray[index]);
-        //console.log(element);
         // obtiene el elemento del Array con el índice: Ex. Array= [1,2,3]
-        // console.log("iteracion: " + index + " valor: " + element);
+        //console.log("iteracion: " + index + " valor: " + element);
         const esPar = validarPuestoPar(index);
         //console.log(" está en la posición par? : " + esPar);
 
-        if (esPar) {
+        if (!esPar) {
             let resultado = element * 2;
-            if (resultado >=10 ) {
+            if (resultado >9 ) {
                 let numerosArray = resultado.toString().split("");
                 let numerosArraySumados = (Number(numerosArray[0]) + Number(numerosArray[1]));
                 //console.log(numerosArraySumados);
 
-                sumaTotal = sumaTotal + numerosArraySumados; // está abreviado. Suma la variable sumaTotal + numerosArraySumados  (>9)
+                sumaTotal += numerosArraySumados; // está abreviado. Suma la variable sumaTotal + numerosArraySumados  (>9)
                 //console.log("estos números son >9: " + sumaTotal);
             } else {
-                sumaTotal = sumaTotal + resultado; //números de resultados son los que se *2 pero son menores a 9 (<9)
+                sumaTotal += resultado; //números de resultados son los que se *2 pero son menores a 9 (<9)
                 //console.log("estos números son <9 que estan en la posición par: " + sumaTotal);
             }
         } else { // guardar el valor del puesto impar
-            sumaTotal = sumaTotal + element //números del puesto impar
-            console.log("estos números son impares: " + sumaTotal);
+            sumaTotal += element //números del puesto impar
+            console.log(element);
         }
       }
-    //console.log(sumaTotal); //son las iteraciones totales ya sumadas (contiene todos los números de cada iteración)
+    console.log(sumaTotal); //son las iteraciones totales ya sumadas (contiene todos los números de cada iteración)
 
     // determinar si la tarjeta de crédito es válida, para esto tiene que terminar en 0 (ej. 80).
     //variable que el número termine en cero. Si termina en cero, va a retornar un true.
 
-    if (sumaTotal%10 === 0){
+   /*if (sumaTotal%10 === 0){
         alert("tarjeta válida");
     } else{
         alert("tarjeta inválida, ingrese el número nuevamente.");
-    }
-
-    return false
+    }*/
+    return sumaTotal%10 === 0
+    
 }
 // Operador modulo (investigar).
 function validarPuestoPar(numero) {
     if (numero % 2 === 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-function validarPuestoImpar(numero) {
-    if (numero % 2 === 1) {
         return true;
     } else {
         return false;
